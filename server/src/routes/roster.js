@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { RosterModel } from '../models/Roster.js';
+import { UserModel } from '../models/AdminUsers.js'
+
 
 //import { UserModel } from '../models/AdminUsers.js'
 
@@ -15,7 +17,7 @@ router.get("/", async(req,res) => {
     }
 });
 
-//route to create a class --add student names 
+//route to create a class  
 router.post("/", async(req,res) => {
     const roster = new RosterModel(req.body);//requesting entire body of model
     try{
@@ -27,7 +29,7 @@ router.post("/", async(req,res) => {
 });
 
 //route for saving a class roster
-router.put("/create-class", async(req,res) => {
+router.put("/", async(req,res) => {
     try{
         const roster = await RosterModel.findById(req.body.recipeID)//finding class roster
         const user = await UserModel.findById(req.body.userID)//finding adminuser we want to save
@@ -38,6 +40,34 @@ router.put("/create-class", async(req,res) => {
         res.json(err);
     }
 });
+
+
+
+//list of saved roster
+//get a list of the saved roster of the user who is logged-in
+router.get("/savedRoster/ids/:userID", async (req,res) =>{
+    try {
+        const user = await UserModel.findById(req.params.userID)
+        res.json({savedRoster: user?.savedRoster});//return saved roster of that Admin user
+    } catch (err) {
+        res.json(err);
+    }
+});
+
+//route for getting only saved roster
+router.get("/savedRoster/:userID", async (req,res) =>{
+    try {
+        const user =await UserModel.findById(req.params.userID)
+        const savedRoster = await RosterModel.find({
+            _id: {$in: user.savedRoster},
+        });
+
+        res.json({savedRoster});
+    } catch (err) {
+        res.json(err);
+    }
+});
+
 
 
 export { router as rosterRouter};

@@ -1,14 +1,10 @@
-// export const CreateClass =() =>{
-//     return <div>Create Class Roster</div>;
-// };
-
 import { useState } from "react";
 import axios from "axios";
 import { useGetUserID } from "../hooks/useGetUserId";
 import { useNavigate } from "react-router-dom";
 
 export const CreateClass =() =>{
-    const userID = useGetUserID();
+    const userID = useGetUserID(); //using hook
 
     const [roster, setRoster] = useState({
         studentName: "",
@@ -23,7 +19,7 @@ export const CreateClass =() =>{
         const navigate = useNavigate();
 
         const handleChange = (event)=>{
-            const {name, value} = event.target;
+            const {name, value} = event.target; //name = name property of each input for the forms
             setRoster({...roster,[name]: value});
         };
 
@@ -41,8 +37,8 @@ export const CreateClass =() =>{
         const onSubmit= async (event) => {
             event.preventDefault();
             try{
-             await axios.post("http://localhost:3001/roster", roster);
-             alert("Roster Created!")
+             await axios.post("http://localhost:3001/roster",roster);
+             alert("Student Profile Created!")
              navigate("/class-list");
             }catch(err) {
              console.error(err);
@@ -76,7 +72,7 @@ export const CreateClass =() =>{
                     <input type="number" id="absences" name="absences" onChange={handleChange}/>
                     
                     <button type="submit">
-                        CreateStudent Profile</button>
+                        Create Student Profile</button>
                 </form>
                 </div>
             );
