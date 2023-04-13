@@ -11,10 +11,12 @@ export const CreateClass =() =>{
     const userID = useGetUserID();
 
     const [roster, setRoster] = useState({
-        Subject: "",
-        FirstName: "",
-        LastName: "",
-        userOwner: userID ,
+        studentName: "",
+        courses: [],
+        notesOnStudent:"",
+        studentPhoto: "",
+        absences: 0,
+        userOwner: userID,
     }); //state that keeps track of roster we are creating
         //put on inituial structure of how object will look
 
@@ -25,54 +27,57 @@ export const CreateClass =() =>{
             setRoster({...roster,[name]: value});
         };
 
-        const handleFirstNameChange = (event, idx)=>{
+        const handleCourseChange = (event, idx)=>{
             const {value} = event.target;
-            const FirstName = roster.FirstName;
-            FirstName[idx] = value;
-            setRoster({...roster,FirstName});
+            const courses = roster.courses;
+            courses[idx] = value;
+            setRoster({...roster,courses});
         };
 
-        const addFirstName = () => {
-            setRoster({...roster, FirstName: [...roster.FirstName, ""] }) //setting recipe object to be the same as it was before but whatever is after the comma is what id going to change in the object
+        const addCourse = () => {
+            setRoster({...roster, courses: [...roster.courses, ""] }) //setting courses object to be the same as it was before but whatever is after the comma is what id going to change in the object
         };
 
         const onSubmit= async (event) => {
             event.preventDefault();
             try{
-             await axios.post("http://localhost:3001/create-class", roster);
-             alert("Recipe Created!")
-             navigate("/");
+             await axios.post("http://localhost:3001/roster", roster);
+             alert("Roster Created!")
+             navigate("/class-list");
             }catch(err) {
              console.error(err);
 
             }
         };
-
-    return (
-    <div className="create-roster">
-        <h2>Create Class Roster</h2> 
-        <form onSubmit={onSubmit}>
-            <label htmlFor="subject">Subject</label>
-            <input type="text" id="subject" name = "subject" onChange={handleChange} />
-
-           
-            <label htmlFor="FirstName">First Name</label>
-
-            {roster.FirstName.map((FirstName, idx) => (
-                <input key={idx} type="text" 
-                name="FirstName" value={FirstName}
-                onChange={(event) => handleFirstNameChange(event, idx)}/>
-            ))}
-            <button onClick={addFirstName}type="button">
-                Add Another Name</button>
-
-            <label htmlFor="LastName">Last Name</label>
-            <textarea id="LastName" name="LastName" onChange={handleChange}></textarea>
-           
-            
-            <button type="submit">
-                Create Class Roster</button>
-        </form>
-        </div>
-    );
-};
+        return (
+            <div className="create-class">
+                <h2>Create Class Roster</h2> 
+                <form onSubmit={onSubmit}>
+                    <label htmlFor="studentName">Student Name</label>
+                    <input type="text" id="name" name = "name" onChange={handleChange} />
+        
+                   
+                    <label htmlFor="enrolledSubjects">Enrolled Courses</label>
+                      
+                      {/* //adding course and index of that course */}
+                    {roster.courses.map((course, idx) => (
+                        <input key={idx} type="text" 
+                        name="courses" value={course}
+                        onChange={(event) => handleCourseChange(event, idx)}/>
+                    ))}
+                    <button onClick={addCourse}type="button">
+                        Add Subject </button>
+        
+                    <label htmlFor="notesOnStudent">Notes on Student</label>
+                    <textarea id="notesOnStudent" name="notesOnStudent" onChange={handleChange}></textarea>
+                    <label htmlFor="studentPhoto">Student Profile Picture</label>
+                    <input type="text" id="studentPhoto" name="studentPhoto" onChange={handleChange}/>
+                    <label htmlFor="absences">Total Absences</label>
+                    <input type="number" id="absences" name="absences" onChange={handleChange}/>
+                    
+                    <button type="submit">
+                        CreateStudent Profile</button>
+                </form>
+                </div>
+            );
+        };

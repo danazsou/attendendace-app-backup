@@ -6,7 +6,7 @@ import { RosterModel } from '../models/Roster.js';
 
 const router = express.Router();
 
-router.get("/create-class", async(req,res) => {
+router.get("/", async(req,res) => {
     try{
         const response = await RosterModel.find({});
         res.json (response);
@@ -16,7 +16,7 @@ router.get("/create-class", async(req,res) => {
 });
 
 //route to create a class --add student names 
-router.post("/create-class", async(req,res) => {
+router.post("/", async(req,res) => {
     const roster = new RosterModel(req.body);//requesting entire body of model
     try{
         const response = await roster.save();
@@ -40,4 +40,4 @@ router.put("/create-class", async(req,res) => {
 });
 
 
-export { router as rostersRouter};
+export { router as rosterRouter};
