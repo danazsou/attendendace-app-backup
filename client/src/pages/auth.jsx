@@ -30,7 +30,7 @@ const Login = () =>{
 
             setCookies("access_token", response.data.token)
             window.localStorage.setItem("userID", response.data.userID); //sets user ID to local storage -- easier access
-            navigate("/createclass")    // calling useNavigate hook here for direction to Homepage
+            navigate("/create-class")    // calling useNavigate hook here for direction to Homepage
         }catch (err){
             console.error(err)
             alert("Wrong username or password. Please register or try again.");
@@ -112,7 +112,7 @@ const Form = ({username,
                 onChange={(event) =>setPassword(event.target.value)}/>
             </div>
 
-            <button type="submit" class="register-buttons">{label}</button>
+            <button type="submit" className="register-buttons">{label}</button>
         </form>
     </div>
 

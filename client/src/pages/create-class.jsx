@@ -12,7 +12,7 @@ export const CreateClass =() =>{
         notesOnStudent:"",
         studentPhoto: "",
         absences: 0,
-        userOwner: userID,
+        userOwner: userID, 
     }); //state that keeps track of roster we are creating
         //put on inituial structure of how object will look
 
@@ -37,20 +37,22 @@ export const CreateClass =() =>{
         const onSubmit= async (event) => {
             event.preventDefault();
             try{
+                //console.log(roster)
              await axios.post("http://localhost:3001/roster",roster);
              alert("Student Profile Created!")
-             navigate("/class-list");
+             navigate("/student-profiles");
             }catch(err) {
              console.error(err);
 
             }
         };
+
         return (
             <div className="create-class">
                 <h2>Create Class Roster</h2> 
                 <form onSubmit={onSubmit}>
                     <label htmlFor="studentName">Student Name</label>
-                    <input type="text" id="name" name = "name" onChange={handleChange} />
+                    <input type="text" id="studentName" name = "studentName" onChange={handleChange} />
         
                    
                     <label htmlFor="enrolledSubjects">Enrolled Courses</label>

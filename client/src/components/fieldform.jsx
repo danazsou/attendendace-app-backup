@@ -16,11 +16,11 @@ function FieldForm() {
       {fields.map((field) => (
         <div key={field.id}>
           <label htmlFor={field.name}>Student Name {field.id}:</label>
-          <input type="text" id={field.name} name={field.name} class="field"/>
+          <input type="text" id={field.name} name={field.name} className="field"/>
         </div>
       ))}
       
-      <button type="button" onClick={addField} class="addfield">
+      <button type="button" onClick={addField} className="addfield">
         Add Field
       </button>
     </div>

@@ -1,11 +1,11 @@
 export const About = () => {
     return <div> 
-        <h1 class="about">About This App</h1>
-        <h2 class="tagline">This is an attendance application that 
+        <h1 className="about">About This App</h1>
+        <h2 className="tagline">This is an attendance application that 
             will record class attendance for Educators 
             to keep record of class.
         </h2>
-        <div class="howto">
+        <div className="howto">
         <p>How to use it:</p>
         <p> You must register your account in order to
             record attendance.

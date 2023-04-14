@@ -3,22 +3,22 @@ import { Link } from 'react-router-dom';
 export const Portal = () => {
   return (
     <div>
-      <h1 class="subtitle-dashboard"> Attendance Dashboard </h1>
+      <h1 className="subtitle-dashboard"> Attendance Dashboard </h1>
      <Link to="/create">
-          <button  class="create">
+          <button  className="create">
             Create Class
           </button>
           </Link>
   
 
-      <div class="grid-container">
+      <div className="grid-container">
         <form action="/add/:id" method="post">
-          <button type="submit" class="absent">
+          <button type="submit" className="absent">
             Absent
           </button>
         </form>
         <form action="/add/:id" method="post">
-          <button type="submit" class="present">
+          <button type="submit" className="present">
             Present
           </button>
         </form>

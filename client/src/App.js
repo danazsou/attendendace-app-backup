@@ -7,7 +7,7 @@ import { Portal } from "./pages/portal";
 import { Navbar } from "./components/navbar";
 import { Create } from "./pages/create";
 import {CreateClass} from "./pages/create-class";
-import {SavedRoster} from "./pages/student-profiles";
+import {StudentProfile} from "./pages/student-profiles";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           <Route path="/portal" element={<Portal />} />
           <Route path="/create" element={<Create />} />
           <Route path="/create-class" element={<CreateClass />} />
-          <Route path="/student-profiles" element={<SavedRoster />} />
+          <Route path="/student-profiles" element={<StudentProfile />} />
         </Routes>
       </Router>
     </div>
