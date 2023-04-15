@@ -6,7 +6,7 @@ import {useCookies} from 'react-cookie';
 export const StudentProfile = () => {
   const [rosters, setRosters] = useState([]);
   // const [savedRosters, setSavedRosters] = useState([]);
-  // const [cookies,_] = useCookies(["access_token"]);
+   const [cookies,_] = useCookies(["access_token"]);
 
   // const userID = useGetUserID();
 
@@ -21,26 +21,35 @@ export const StudentProfile = () => {
       }
     };
 
+    if(cookies.access_token)
     fetchRoster();
   }, []);
 
 
 return (
   <div>
-    <h1>Roster</h1>
+    <h1>Student Profiles</h1>
     <ul>
       {rosters.map((roster) =>(
         <li key={roster._id}>
           <div>
             <h2>{roster.studentName}</h2>
           </div>
-
-          <div className="notesOnStudent">
-            <p>{roster.notesOnStudent}</p>
-          </div>
           <img src={roster.studentPhoto} alt={roster.studentName} />
-          <p>Abcences: {roster.absences}days</p>
+          <div className="notesOnStudent">
+            <p>NOTES: {roster.notesOnStudent}</p>
+          </div>
+
+          <div> 
+            <p>Courses Currently Enrolled: {roster.courses}</p>
+          </div>
+     
+          <p>Abcences: {roster.absences} Days</p>
+
+          <button>Edit Profile</button>
+          <button>Delete Profile</button>
           </li>
+          
       ))}
     </ul>
   </div>
