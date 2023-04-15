@@ -5,7 +5,6 @@ import { Auth } from "./pages/auth";
 import { About } from "./pages/about";
 import { Portal } from "./pages/portal";
 import { Navbar } from "./components/navbar";
-import { Create } from "./pages/create";
 import {CreateClass} from "./pages/create-class";
 import {StudentProfile} from "./pages/student-profiles";
 
@@ -19,7 +18,7 @@ function App() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/about" element={<About />} />
           <Route path="/portal" element={<Portal />} />
-          <Route path="/create" element={<Create />} />
+
           <Route path="/create-class" element={<CreateClass />} />
           <Route path="/student-profiles" element={<StudentProfile />} />
         </Routes>

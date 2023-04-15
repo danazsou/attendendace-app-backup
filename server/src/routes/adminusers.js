@@ -2,6 +2,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+
 const router = express.Router();
 import { UserModel } from "../models/AdminUsers.js";
 
@@ -33,16 +34,20 @@ router.post("/login", async (req, res) => {
       .status(400)
       .json({ message: "Username or password is incorrect" });
   }
-  const token = jwt.sign({ id: user._id }, "secret"); //signing id of user, along with token
-  res.json({ token, userID: user._id });
+  const token = jwt.sign(
+    { id: user._id },
+   " process.env.JWT_SECRET"); //signing id of user, along with token
+     res.json({ token, userID: user._id });
 });
+
+
 
 export { router as userRouter };
 
 export const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
-    jwt.verify(authHeader, "secret", (err) => {
+    jwt.verify(authHeader, "process.env.JWT_SECRET", (err) => {
       if (err) {
         return res.sendStatus(403);
       }
@@ -52,3 +57,4 @@ export const verifyToken = (req, res, next) => {
     res.sendStatus(401);
   }
 };
+
